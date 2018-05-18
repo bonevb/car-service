@@ -3,7 +3,7 @@ import sqlite3
 DB_NAME = "vehicle_management.db"
 
 db = sqlite3.connect(DB_NAME)
-db.row_factory = sqlite3.Row
+#db.row_factory = sqlite3.Row
 c = db.cursor()
 
 drop_base_user = """DROP TABLE IF EXISTS BASE_USER"""
@@ -79,16 +79,33 @@ create_table_repair_hours = """
 CREATE TABLE IF NOT EXISTS REPAIR_HOURS(
 ID INTEGER PRIMARY KEY AUTOINCREMENT,
 DATE TEXT NOT NULL,
-START_HOURS INTEGER NOT NULL,
-VEHICLE  INTEGER NOT NULL,
-BILL REAL NOT NULL,
-MECHANIC_SERVICE INTEGER NOT NULL,
+START_HOUR INTEGER NOT NULL,
+VEHICLE  INTEGER ,
+BILL REAL ,
+MECHANIC_SERVICE INTEGER ,
 FOREIGN KEY (MECHANIC_SERVICE) REFERENCES MECHANIC_SERVICE(ID)
 FOREIGN KEY (VEHICLE) REFERENCES VEHICLE(ID)
 )
 """
 c.execute(create_table_repair_hours)
 db.commit()
+
+insert_into_repair_hour = """
+INSERT INTO REPAIR_HOURS (date, start_hour)
+VALUES (:date, :start_hour)
+"""
+c.execute(insert_into_repair_hour, {
+                                    'date': "25-05-2018",
+                                    'start_hour': '10:00'
+})
+c.execute(insert_into_repair_hour, {
+                                    'date': "25-05-2018",
+                                    'start_hour': '11:00'
+})
+c.execute(insert_into_repair_hour, {
+                                    'date': "26-05-2018",
+                                    'start_hour': '12:00'
+})
 
 drop_mechanic_service = """DROP TABLE IF EXISTS MECHANIC_SERVICE"""
 c.execute(drop_mechanic_service)
@@ -124,6 +141,10 @@ insert_base_user = """
 INSERT INTO BASE_USER (user_name, email, phone_number, address)
  VALUES (:user_name, :email, :phone_number, :address
  )
+"""
+
+insert_into_repair_hour = """
+INSERT INTO REPAIR_HOURS ()
 """
 
 c.execute(insert_base_user, {'user_name': 'Boby',
