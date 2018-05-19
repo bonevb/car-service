@@ -15,15 +15,42 @@ class Menu:
         if user:
             print('Hello {}'.format(user))
             print(self.ask_for_command)
-            command = input('command> :')
-            while command != 'exit':
+
+            while True:
+                command = input('command> :')
                 if command == 'list_all_free_hours':
                     self.controller.list_all_free_hours()
-                    command = input('command> :')
+
                 if command == 'list_free_hours <date>':
                     date = input('please choose date: ')
                     self.controller.get_free_hours_by_date(date)
-                    command = input('command> :')
+
+                if command == "save_repair_hour <hour_id>":
+                    print('Your cars')
+                    self.controller.list_vehicle_by_username(user_name)
+                    vehicle = input('choose vehicle id')
+                    print('Available services')
+                    self.controller.list_services()
+                    service = input('Choose service')
+
+                if command == 'add_vehicle':
+                    category = input('What is the category of your vehicle: ')
+                    make = input('make: ')
+                    model = input('model: ')
+                    reg_number = input('register number: ')
+                    gear_box = input('gear box: ')
+                    owner = self.controller.get_id_of_username(user_name)
+                    self.controller.add_vehicle(
+                        category,
+                        make,
+                        model,
+                        reg_number,
+                        gear_box,
+                        owner
+                        )
+                    print('Thank you! You added new personal vehicle!')
+                if command == 'exit':
+                    sys.exit()
 
         else:
             print('Unknown user!\n Would you like to create new user?')

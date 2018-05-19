@@ -35,4 +35,8 @@ class RepairHour:
             x.add_row([i[0], i[1]])
         print(x)
 
+    @classmethod
+    def save_repair_hour_by_id(id, car_id, service_id):
+        pass
+
 # print(RepairHour.get_free_hours_date('25-05-2018'))

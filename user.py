@@ -27,7 +27,6 @@ class User:
         self.phone_number = phone_number
         self.address = address
 
-
     @classmethod
     def save_to_db(cls, username, email, phone_number, address):
         c.execute(constants.insert_base_user,
@@ -35,17 +34,37 @@ class User:
                    'email': email,
                    'phone_number': phone_number,
                    'address': address})
+        ids = c.execute('SELECT ID FROM BASE_USER WHERE USER_NAME =?',(username,))
+        for i in ids.fetchone():
+          # print(i)
+          c.execute('INSERT INTO CLIENT  VALUES (?)', (i,))
+          db.commit()
         db.commit()
 
     @classmethod
+    def get_client_id(cls, username):
+      ids = c.execute('SELECT ID FROM BASE_USER WHERE USER_NAME =?',(username,))
+      for i in ids.fetchone():
+        return i
+
+
+    # @classmethod
+    # def save_to_client(cls, username):
+    #     ids = c.execute('SELECT ID FROM BASE_USER WHERE USER_NAME =?',(username,))
+    #     for i in ids.fetchone():
+    #       print(i)
+    #       c.execute('INSERT INTO CLIENT  VALUES (?)', (i,))
+    #       db.commit()
+
+    @classmethod
     def check_user(cls, username):
-        c.execute('SELECT USER_NAME FROM BASE_USER WHERE USER_NAME=?', (username,))
+        c.execute('SELECT USER_NAME FROM BASE_USER WHERE USER_NAME=?',
+                 (username,))
         try:
             for i in c.fetchone():
                 return i
         except Exception:
             return None
-
 
     def get_all_vehicle_by_username(self, username):
         pass
@@ -60,3 +79,4 @@ class User:
 # except Exception:
 #     print('Never')
 
+# User.save_to_client('dany')

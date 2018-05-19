@@ -62,7 +62,7 @@ ID INTEGER PRIMARY KEY AUTOINCREMENT,
 CATEGORY TEXT NOT NULL,
 MAKE TEXT NOT NULL,
 MODEL TEXT NOT NULL,
-REGISTER_NOMER TEXT NOT NULL,
+REGISTER_NUMBER TEXT NOT NULL,
 GEAR_BOX TEXT,
 OWNER TEXT NOT NULL,
 FOREIGN KEY (OWNER) REFERENCES CLIENT(BASE_ID)
@@ -147,21 +147,27 @@ insert_into_repair_hour = """
 INSERT INTO REPAIR_HOURS ()
 """
 
-c.execute(insert_base_user, {'user_name': 'Boby',
-                             'email': 'test@abv.bg',
-                             'phone_number': 87654321,
-                             'address': 'Sofia'})
+# c.execute(insert_base_user, {'user_name': 'Boby',
+#                              'email': 'test@abv.bg',
+#                              'phone_number': 87654321,
+#                              'address': 'Sofia'})
 
 
-c.execute(insert_base_user, {'user_name': 'Ivan',
-                             'email': 'ivan@abv.bg',
-                             'phone_number': 1234,
-                             'address': 'Varna'})
+# c.execute(insert_base_user, {'user_name': 'Ivan',
+#                              'email': 'ivan@abv.bg',
+#                              'phone_number': 1234,
+#                              'address': 'Varna'})
 
-c.execute(insert_base_user, {'user_name': 'Pesho',
-                             'email': 'Pesho@abv.bg',
-                             'phone_number': 7654,
-                             'address': 'Plovdiv'})
+# c.execute(insert_base_user, {'user_name': 'Pesho',
+#                              'email': 'Pesho@abv.bg',
+#                              'phone_number': 7654,
+#                              'address': 'Plovdiv'})
+
+insert_service = """
+INSERT INTO SERVICE (name) VALUES (:name)
+"""
+
+c.execute(insert_service, {'name': 'Oil Change'})
 
 db.commit()
 
