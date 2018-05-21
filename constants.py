@@ -21,3 +21,6 @@ INSERT INTO VEHICLE (category, make, model, register_number, gear_box, owner) VA
 select_vehicle = """
 SELECT * FROM VEHICLE WHERE OWNER = ?
 """
+update_vehicle = """
+UPDATE VEHICLE SET (category, make, model, register_number, gear_box, owner) WHERE ID = id
+"""

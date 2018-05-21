@@ -4,7 +4,7 @@ import sys
 
 class Menu:
     controller = Controller()
-    ask_for_command = """You can choose from the following commands:\nlist_all_free_hours\nlist_free_hours <date>\nsave_repair_hour <hour_id>\nupdate_repair_hour <hour_id>\ndelete_repair_hour <hour_id>\nadd_vehicle\nupdate_vehicle <vehicle_id>\ndelete_vehicle <vehicle_id>\nexit
+    ask_for_command = """You can choose from the following commands:\nlist_all_free_hours\nlist_free_hours <date>\nsave_repair_hour <hour_id>\nupdate_repair_hour <hour_id>\ndelete_repair_hour <hour_id>\nadd_vehicle\nupdate_vehicle <vehicle_id>\ndelete_vehicle <vehicle_id>\nlist_personal_vehicles\nexit
                     """
 
     @classmethod
@@ -49,6 +49,33 @@ class Menu:
                         owner
                         )
                     print('Thank you! You added new personal vehicle!')
+                if command == 'update_vehicle <vehicle_id>':
+                    self.controller.list_vehicle_by_username(user_name)
+                    id = input('Choose vehicle ID:')
+                    category = input('What is the category of your vehicle: ')
+                    make = input('make: ')
+                    model = input('model: ')
+                    reg_number = input('register number: ')
+                    gear_box = input('gear box: ')
+                    owner = self.controller.get_id_of_username(user_name)
+                    self.controller.update_vehicle(
+                        id,
+                        category,
+                        make,
+                        model,
+                        reg_number,
+                        gear_box,
+                        owner
+                        )
+                if command == 'delete_vehicle <vehicle_id>':
+                    self.controller.list_vehicle_by_username(user_name)
+                    id = input('Choose vehicle ID:')
+                    owner = self.controller.get_id_of_username(user_name)
+                    self.controller.delete_vehicle(id, owner)
+
+                if command == 'list_personal_vehicles':
+                    self.controller.list_vehicle_by_username(user_name)
+
                 if command == 'exit':
                     sys.exit()
 

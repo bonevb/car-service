@@ -2,7 +2,7 @@ from user import User
 from mechanic import Mechanic
 from repair_hours import  RepairHour
 from vehicle import Vehicle
-from services import Service
+# from services import Service
 
 
 class Controller:
@@ -56,6 +56,14 @@ class Controller:
     @classmethod
     def save_repair_hour(id, car_id, service_id):
         return RepairHour.save_repair_hour_by_id()
+
+    @classmethod
+    def update_vehicle(cls, id, *params):
+        return Vehicle(*params).update_vehicle_in_db(id, *params)
+
+    @classmethod
+    def delete_vehicle(cls, id, owner):
+        return Vehicle.remove_from_db(id, owner)
 
 
 

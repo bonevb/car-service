@@ -37,5 +37,14 @@ class Vehicle:
             x.add_row([i[0], i[1], i[2], i[3], i[4], i[5]])
         print(x)
 
+    @classmethod
+    def update_vehicle_in_db(cls, id, category, make, model, register_number, gear_box, owner):
+        c.execute('UPDATE VEHICLE SET category=?, make=?, model=?, register_number=?, gear_box=?, owner=? WHERE id=?', (category, make, model, register_number, gear_box, owner, id))
+        db.commit()
 
-        
+    @classmethod
+    def remove_from_db(cls, id, owner):
+        c.execute('DELETE FROM VEHICLE WHERE ID=? AND OWNER=?', (id, owner))
+        db.commit()
+
+
