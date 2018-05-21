@@ -28,6 +28,9 @@ class Controller:
     def check_if_user_exists(cls, username):
         return User.check_user(username)
 
+    def check_type_of_user(cls, username):
+        return User.check_type(username)
+
     @classmethod
     def list_all_free_hours(cls):
         return RepairHour.get_free_hours()

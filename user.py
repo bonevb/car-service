@@ -21,19 +21,21 @@ c = db.cursor()
 #                              'address': 'Ruse'})
 
 class User:
-    def __init__(self, user_name, email, phone_number, address):
+    def __init__(self, user_name, email, phone_number, address, type):
         self.user_name = user_name
         self.email = email
         self.phone_number = phone_number
         self.address = address
+        self.type = type
 
     @classmethod
-    def save_to_db(cls, username, email, phone_number, address):
+    def save_to_db(cls, username, email, phone_number, address, type):
         c.execute(constants.insert_base_user,
                   {'user_name': username,
                    'email': email,
                    'phone_number': phone_number,
-                   'address': address})
+                   'address': address,
+                   'type': type})
         ids = c.execute('SELECT ID FROM BASE_USER WHERE USER_NAME =?',(username,))
         for i in ids.fetchone():
           # print(i)
@@ -58,7 +60,19 @@ class User:
 
     @classmethod
     def check_user(cls, username):
-        c.execute('SELECT USER_NAME FROM BASE_USER WHERE USER_NAME=?',
+
+        c.execute('SELECT USER_NAME, TYPE FROM BASE_USER WHERE USER_NAME=?',
+                 (username,))
+        try:
+            for i in c.fetchone():
+                return i
+        except Exception:
+            return None
+
+    @classmethod
+    def check_type(cls, username):
+
+        c.execute('SELECT TYPE FROM BASE_USER WHERE USER_NAME=?',
                  (username,))
         try:
             for i in c.fetchone():
