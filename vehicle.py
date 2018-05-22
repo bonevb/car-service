@@ -48,3 +48,17 @@ class Vehicle:
         db.commit()
 
 
+#     @classmethod
+#     def list_vehicle_by_user_id(cls, ids):
+#         x = PrettyTable()
+#         cars = []
+#         x.field_names = ['id','category', 'make', 'model' ,'reg number', 'gear_box']
+#         row = c.execute('SELECT id FROM VEHICLE WHERE OWNER = ?', (ids,))
+#         a = row.fetchall()
+#
+#         for i in a:
+#             cars.append(i[0])
+#         return cars
+#
+#
+# print(Vehicle.list_vehicle_by_user_id(4))

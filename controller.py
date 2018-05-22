@@ -2,7 +2,7 @@ from user import User
 from mechanic import Mechanic
 from repair_hours import  RepairHour
 from vehicle import Vehicle
-# from services import Service
+from services import Service
 
 
 class Controller:
@@ -67,6 +67,40 @@ class Controller:
     @classmethod
     def delete_vehicle(cls, id, owner):
         return Vehicle.remove_from_db(id, owner)
+
+    @classmethod
+    def save_repair_hour_id(cls,vehicle, service, free_hour_id):
+        return RepairHour.save_repair_hour_by_id(vehicle, service, free_hour_id)
+
+    @classmethod
+    def list_saved_repair_hours(cls, client_id):
+        return RepairHour.get_saved_repair_hour(client_id)
+
+    @classmethod
+    def delete_repair_hour(cls, id):
+        return RepairHour.delete_repair_hour_by_id(id)
+
+    @classmethod
+    def get_all_busy_hours(cls):
+        return RepairHour.all_busy_hours()
+
+
+    @classmethod
+    def get_all_busy_hours_date(cls, date):
+        return RepairHour.all_busy_hours(date)
+
+    @classmethod
+    def add_new_repair_hour(cls, time, date):
+        return RepairHour.add_new_repair_hour_date(time, date)
+
+    @classmethod
+    def create_new_service(cls, name):
+        return Service.create_service(name)
+
+    @classmethod
+    def add_service_to_mechanic(cls, service_name, mechanic_id):
+        return Mechanic.add_service_to_mechanic_id(service_name, mechanic_id)
+
 
 
 

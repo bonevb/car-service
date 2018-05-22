@@ -20,3 +20,7 @@ class Service:
         a = row.fetchone()
         x.add_row([a[0], a[1]])
         print(x)
+
+    @classmethod
+    def create_service(cls, name):
+        c.execute('INSERT INTO SERVICE (name) VALUES (:name)', {'name': name})

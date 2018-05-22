@@ -39,6 +39,19 @@ class Menu:
                         print('Available services')
                         self.controller.list_services()
                         service = input('Choose service')
+                        self.controller.list_all_free_hours()
+                        free_hour_id = input('Choose repair hour id: ')
+                        self.controller.save_repair_hour_id(vehicle, service, free_hour_id)
+
+                    if command == 'delete_repair_hour <hour_id>':
+                        print('Your car')
+                        self.controller.list_vehicle_by_username(user_name)
+                        print('Saved repair hours for your car')
+                        client_id = self.controller.get_id_of_username(user_name)
+                        self.controller.list_saved_repair_hours(client_id)
+                        chousen_id = input('Choose id: ')
+                        self.controller.delete_repair_hour(chousen_id)
+
 
                     if command == 'add_vehicle':
                         category = input('What is the category of your vehicle: ')
@@ -86,14 +99,31 @@ class Menu:
                     if command == 'exit':
                         sys.exit()
             if type == 'Mechanic':
-                print(self.ask_for_mechanic_command
-                      )
-                command = input('command> :')
-                if command == 'list_all_free_hours':
-                        self.controller.list_all_free_hours()
-                if command == 'list_free_hours <date>':
-                        date = input('please choose date: ')
-                        self.controller.get_free_hours_by_date(date)
+
+                while True:
+                    print(self.ask_for_mechanic_command
+                          )
+                    command = input('command> :')
+                    if command == 'list_all_free_hours':
+                            self.controller.list_all_free_hours()
+                    if command == 'list_free_hours <date>':
+                            date = input('please choose date: ')
+                            self.controller.get_free_hours_by_date(date)
+                    if command == 'list_all_busy_hours':
+                        self.controller.get_all_busy_hours()
+                    if command == 'list_busy_hours <date>':
+                        date = input('Choose date')
+                        self.controller.get_all_busy_hours(date)
+                    if command == 'add_new_repair_hour':
+                        time = input('Choose time')
+                        date = input('Choose date')
+                        self.controller.add_new_repair_hour(time, date)
+                    if command == 'add_new_service':
+                        service_name = input('Service name: ')
+                        mechanic_id = self.controller.get_id_of_username(user_name)
+                        self.controller.create_new_service(service_name)
+                        self.controller.add_service_to_mechanic(service_name, mechanic_id)
+
 
         else:
             print('Unknown user!\n Would you like to create new user?')

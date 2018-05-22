@@ -80,8 +80,6 @@ class User:
         except Exception:
             return None
 
-    def get_all_vehicle_by_username(self, username):
-        pass
 
 #
 # # User.save_to_db('dux', 'dux@abv.bg', 98765, 'Sofia')

@@ -41,6 +41,15 @@ class Mechanic:
         for i in ids.fetchone():
           # print(i)
           c.execute('INSERT INTO MECHANIC  VALUES (?)', (i,))
+          c.execute('INSERT INTO MECHANIC_SERVICE (MECHANIC_ID)  VALUES (?)', (i,))
           db.commit()
         db.commit()
         db.commit()
+
+    @classmethod
+    def add_service_to_mechanic_id(cls, service_name, mechanic_id):
+        service_id = c.execute('SELECT ID FROM SERVICE WHERE NAME=?', service_name)
+        print(service_id)
+        c.execute('INSERT INTO MECHANIC_SERVICE (SERVICE_ID) VALUES (?) WHERE ID=?', service_id, mechanic_id)
+        db.commit()
+
