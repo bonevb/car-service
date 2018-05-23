@@ -23,4 +23,5 @@ class Service:
 
     @classmethod
     def create_service(cls, name):
-        c.execute('INSERT INTO SERVICE (name) VALUES (:name)', {'name': name})
+        c.execute('INSERT INTO SERVICE (name) VALUES (?)', (name, ))
+        db.commit()

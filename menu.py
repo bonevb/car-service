@@ -121,6 +121,7 @@ class Menu:
                     if command == 'add_new_service':
                         service_name = input('Service name: ')
                         mechanic_id = self.controller.get_id_of_username(user_name)
+
                         self.controller.create_new_service(service_name)
                         self.controller.add_service_to_mechanic(service_name, mechanic_id)
 

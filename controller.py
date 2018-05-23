@@ -105,5 +105,6 @@ class Controller:
 
 
 # Controller.list_vehicle_by_username('tedi')
-
+# Controller.create_new_service('test2')
 # Controller.list_services()
+# print(Controller.add_service_to_mechanic('test2', 1))
